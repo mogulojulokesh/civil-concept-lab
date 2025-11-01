@@ -11,6 +11,8 @@ import Transportation from "./pages/Transportation";
 import Environmental from "./pages/Environmental";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ConceptLibrary from "./pages/ConceptLibrary";
+import ConceptDetail from "./pages/ConceptDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +32,8 @@ const App = () => (
             <Route path="/environmental" element={<Environmental />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/library" element={<ConceptLibrary />} />
+            <Route path="/concept/:id" element={<ConceptDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
