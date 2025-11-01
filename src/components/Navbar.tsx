@@ -12,10 +12,9 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Structural", path: "/structural" },
-    { name: "Geotechnical", path: "/geotechnical" },
-    { name: "Transportation", path: "/transportation" },
-    { name: "Environmental", path: "/environmental" },
+    { name: "Library", path: "/structural" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -27,7 +26,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-bold text-xl hover:opacity-80 transition-opacity">
             <BookOpen className="h-6 w-6 text-primary" />
-            <span className="hidden sm:inline">CE Concepts</span>
+            <span className="hidden sm:inline">Civil Concepts Lab</span>
           </Link>
 
           {/* Desktop Navigation */}

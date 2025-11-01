@@ -9,6 +9,8 @@ import Structural from "./pages/Structural";
 import Geotechnical from "./pages/Geotechnical";
 import Transportation from "./pages/Transportation";
 import Environmental from "./pages/Environmental";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/geotechnical" element={<Geotechnical />} />
             <Route path="/transportation" element={<Transportation />} />
             <Route path="/environmental" element={<Environmental />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

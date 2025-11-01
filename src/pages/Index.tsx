@@ -48,20 +48,16 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Civil Engineering Concepts Library
+              Civil Concepts Lab
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Master the fundamentals through interactive visualizations, diagrams, and hands-on learning
+              Interactive explanations of Civil Engineering principles — Structural, Geotechnical, Transportation, Environmental, and more.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" variant="secondary" asChild>
                 <Link to="/structural">
-                  Start Learning <ArrowRight className="ml-2 h-5 w-5" />
+                  Explore the Library <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 border-white/20 hover:bg-white/20">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Browse Topics
               </Button>
             </div>
           </div>
@@ -150,9 +146,9 @@ const Index = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">About This Library</h2>
+            <h2 className="text-3xl font-bold mb-6">About Civil Concepts Lab</h2>
             <p className="text-lg text-muted-foreground mb-4">
-              The Civil Engineering Concepts Library is designed for students, professionals, and
+              Civil Concepts Lab is designed for students, professionals, and
               enthusiasts who want to deepen their understanding of fundamental civil engineering
               principles.
             </p>
@@ -164,6 +160,13 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-card border-t py-8">
+        <div className="container mx-auto px-4 text-center text-muted-foreground">
+          <p>&copy; 2024 Civil Concepts Lab. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
