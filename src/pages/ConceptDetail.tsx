@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import Quiz from "@/components/Quiz";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,29 +15,44 @@ const ConceptDetail = () => {
 
   if (!concept) {
     return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <GlossarySidebar />
-        <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl font-bold mb-4">Concept Not Found</h1>
-          <p className="text-muted-foreground mb-8">
-            The concept you're looking for doesn't exist.
-          </p>
-          <Button asChild>
-            <Link to="/library">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Library
-            </Link>
-          </Button>
+      <>
+        <Helmet>
+          <title>Concept Not Found - Civil Concepts Lab</title>
+          <meta name="description" content="The requested concept could not be found." />
+        </Helmet>
+
+        <div className="min-h-screen bg-background">
+          <Navbar />
+          <GlossarySidebar />
+          <CivilGPT />
+          <div className="container mx-auto px-4 py-20 text-center">
+            <h1 className="text-4xl font-bold mb-4">Concept Not Found</h1>
+            <p className="text-muted-foreground mb-8">
+              The concept you're looking for doesn't exist.
+            </p>
+            <Button asChild>
+              <Link to="/library">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Library
+              </Link>
+            </Button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>{concept.title} - Civil Concepts Lab</title>
+        <meta name="description" content={concept.shortDescription} />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <section className="py-12">
         <div className="container mx-auto px-4">
@@ -122,10 +139,11 @@ const ConceptDetail = () => {
 
       <footer className="bg-card border-t py-8 mt-12">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 Civil Concepts Lab. All rights reserved.</p>
+          <p>Developed on Lovable AI — Civil Concepts Lab © 2025.</p>
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

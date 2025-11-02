@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import ConceptCard from "@/components/ConceptCard";
 import Quiz from "@/components/Quiz";
 import { Slider } from "@/components/ui/slider";
@@ -65,9 +67,19 @@ const Transportation = () => {
   const traffic = getTrafficLevel(trafficVolume[0]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Transportation Engineering - Civil Concepts Lab | Traffic, Signals, Pavements</title>
+        <meta 
+          name="description" 
+          content="Explore transportation engineering with interactive demonstrations of traffic flow, signal timing, pavement design, and geometric principles." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
@@ -391,7 +403,7 @@ const Transportation = () => {
           <Quiz questions={quizQuestions} title="Transportation Engineering Quiz" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

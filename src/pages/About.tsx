@@ -1,11 +1,23 @@
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>About - Civil Concepts Lab | Our Mission & Vision</title>
+        <meta 
+          name="description" 
+          content="Learn about Civil Concepts Lab's mission to make civil engineering education accessible and engaging through interactive visualizations and comprehensive learning resources." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -37,12 +49,13 @@ const About = () => {
         </div>
       </section>
 
-      <footer className="bg-card border-t py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 Civil Concepts Lab. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+        <footer className="bg-card border-t py-8">
+          <div className="container mx-auto px-4 text-center text-muted-foreground">
+            <p>Developed on Lovable AI — Civil Concepts Lab © 2025.</p>
+          </div>
+        </footer>
+      </div>
+    </>
   );
 };
 

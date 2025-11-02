@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import ConceptCard from "@/components/ConceptCard";
 import Quiz from "@/components/Quiz";
 import { Slider } from "@/components/ui/slider";
@@ -63,9 +65,19 @@ const Environmental = () => {
   const air = getAirQuality(pollutionLevel[0]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Environmental Engineering - Civil Concepts Lab | Water, Air, Waste</title>
+        <meta 
+          name="description" 
+          content="Learn environmental engineering fundamentals including water treatment, air pollution control, waste management hierarchy, and sustainability principles." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
@@ -426,7 +438,7 @@ const Environmental = () => {
           <Quiz questions={quizQuestions} title="Environmental Engineering Quiz" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,0 +1,4 @@
+project_id = "plhqkthzxzdbnulgiqap"
+
+[functions.civil-gpt]
+verify_jwt = false

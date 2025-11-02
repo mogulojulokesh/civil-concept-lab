@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ConceptLibrary from "./pages/ConceptLibrary";
 import ConceptDetail from "./pages/ConceptDetail";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/library" element={<ConceptLibrary />} />
             <Route path="/concept/:id" element={<ConceptDetail />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

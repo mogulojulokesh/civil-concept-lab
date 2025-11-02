@@ -1,9 +1,11 @@
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2, Mountain, Car, Leaf, ArrowRight, BookOpen, Users, Lightbulb } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 
 const Index = () => {
   const disciplines = [
@@ -38,9 +40,19 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background content-wrapper">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Civil Concepts Lab - Learn Civil Engineering Interactively</title>
+        <meta 
+          name="description" 
+          content="Master civil engineering concepts through interactive visualizations and hands-on simulations. Explore structural, geotechnical, transportation, and environmental engineering." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background content-wrapper">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
@@ -162,12 +174,13 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 Civil Concepts Lab. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+        <footer className="bg-card border-t py-8">
+          <div className="container mx-auto px-4 text-center text-muted-foreground">
+            <p>Developed on Lovable AI — Civil Concepts Lab © 2025.</p>
+          </div>
+        </footer>
+      </div>
+    </>
   );
 };
 

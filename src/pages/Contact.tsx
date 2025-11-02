@@ -1,13 +1,25 @@
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import { Mail, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Contact Us - Civil Concepts Lab | Get in Touch</title>
+        <meta 
+          name="description" 
+          content="Contact Civil Concepts Lab for questions, feedback, or support. We're here to help with your civil engineering learning journey." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -60,10 +72,11 @@ const Contact = () => {
 
       <footer className="bg-card border-t py-8">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 Civil Concepts Lab. All rights reserved.</p>
+          <p>Developed on Lovable AI — Civil Concepts Lab © 2025.</p>
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

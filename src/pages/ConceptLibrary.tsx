@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,9 +22,19 @@ const ConceptLibrary = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Concept Library - Civil Concepts Lab | Interactive Engineering Concepts</title>
+        <meta 
+          name="description" 
+          content="Browse our comprehensive library of civil engineering concepts with interactive visualizations across structural, geotechnical, transportation, and environmental disciplines." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <section className="py-12">
         <div className="container mx-auto px-4">
@@ -101,10 +113,11 @@ const ConceptLibrary = () => {
 
       <footer className="bg-card border-t py-8 mt-12">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 Civil Concepts Lab. All rights reserved.</p>
+          <p>Developed on Lovable AI — Civil Concepts Lab © 2025.</p>
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

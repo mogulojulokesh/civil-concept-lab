@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import ConceptCard from "@/components/ConceptCard";
 import Quiz from "@/components/Quiz";
 import { Slider } from "@/components/ui/slider";
@@ -52,9 +54,19 @@ const Structural = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Structural Engineering - Civil Concepts Lab | Beams, Stress, Trusses</title>
+        <meta 
+          name="description" 
+          content="Learn structural engineering concepts including beam bending, stress-strain relationships, truss systems, and load types through interactive visualizations." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
@@ -311,7 +323,7 @@ const Structural = () => {
           <Quiz questions={quizQuestions} title="Structural Engineering Quiz" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

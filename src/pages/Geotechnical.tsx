@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
+import CivilGPT from "@/components/CivilGPT";
 import ConceptCard from "@/components/ConceptCard";
 import Quiz from "@/components/Quiz";
 import { Slider } from "@/components/ui/slider";
@@ -50,9 +52,19 @@ const Geotechnical = () => {
   const stability = getSlopeStability(slopeAngle[0]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <GlossarySidebar />
+    <>
+      <Helmet>
+        <title>Geotechnical Engineering - Civil Concepts Lab | Soil, Foundations, Slopes</title>
+        <meta 
+          name="description" 
+          content="Master geotechnical engineering with interactive lessons on soil compaction, slope stability, foundation systems, and retaining walls." 
+        />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <GlossarySidebar />
+        <CivilGPT />
 
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
@@ -394,7 +406,7 @@ const Geotechnical = () => {
           <Quiz questions={quizQuestions} title="Geotechnical Engineering Quiz" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
