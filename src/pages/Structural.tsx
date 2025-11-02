@@ -323,6 +323,7 @@ const Structural = () => {
           <Quiz questions={quizQuestions} title="Structural Engineering Quiz" />
         </div>
       </div>
+      </div>
     </>
   );
 };

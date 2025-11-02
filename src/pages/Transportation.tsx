@@ -403,6 +403,7 @@ const Transportation = () => {
           <Quiz questions={quizQuestions} title="Transportation Engineering Quiz" />
         </div>
       </div>
+      </div>
     </>
   );
 };

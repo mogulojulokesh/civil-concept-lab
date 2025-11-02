@@ -438,6 +438,7 @@ const Environmental = () => {
           <Quiz questions={quizQuestions} title="Environmental Engineering Quiz" />
         </div>
       </div>
+      </div>
     </>
   );
 };

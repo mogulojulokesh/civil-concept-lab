@@ -406,6 +406,7 @@ const Geotechnical = () => {
           <Quiz questions={quizQuestions} title="Geotechnical Engineering Quiz" />
         </div>
       </div>
+      </div>
     </>
   );
 };

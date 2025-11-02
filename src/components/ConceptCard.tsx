@@ -10,17 +10,17 @@ interface ConceptCardProps {
 
 const ConceptCard = ({ title, description, children, icon }: ConceptCardProps) => {
   return (
-    <Card className="hover:shadow-lg transition-shadow duration-300 bg-gradient-card">
-      <CardHeader>
+    <Card className="hover:shadow-xl transition-all duration-500 bg-gradient-card hover:-translate-y-1 animate-fade-in">
+      <CardHeader className="space-y-3">
         <div className="flex items-start gap-3">
-          {icon && <div className="text-primary mt-1">{icon}</div>}
+          {icon && <div className="text-primary mt-1 p-2 rounded-lg bg-primary/10">{icon}</div>}
           <div>
-            <CardTitle className="text-xl mb-2">{title}</CardTitle>
-            <CardDescription className="text-base">{description}</CardDescription>
+            <CardTitle className="text-xl mb-2 font-bold">{title}</CardTitle>
+            <CardDescription className="text-base leading-relaxed">{description}</CardDescription>
           </div>
         </div>
       </CardHeader>
-      <CardContent>{children}</CardContent>
+      <CardContent className="space-y-4">{children}</CardContent>
     </Card>
   );
 };
