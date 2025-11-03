@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Concept Animation Keyframes */
+@keyframes beam-bend {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-8px) scaleY(0.95); }
+}
+
+@keyframes vehicle-move {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes water-flow {
+  0% { transform: translateX(0) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(30px) translateY(-5px); opacity: 1; }
+  100% { transform: translateX(60px) translateY(0); opacity: 0.6; }
+}
+
+@keyframes soil-compress {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.85); }
+}
+
+@keyframes wind-sway {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  33% { transform: rotate(2deg) translateX(3px); }
+  66% { transform: rotate(-2deg) translateX(-3px); }
+}
+
+@keyframes construction-rise {
+  0% { height: 20%; opacity: 0.5; }
+  100% { height: 100%; opacity: 1; }
+}
+
+@keyframes survey-scan {
+  0%, 100% { transform: rotate(0deg); opacity: 0.8; }
+  50% { transform: rotate(45deg); opacity: 1; }
+}
+
+@keyframes city-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */

@@ -91,16 +91,54 @@ const ConceptDetail = () => {
                 <CardTitle className="text-2xl">Interactive Visualization</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="bg-muted/30 rounded-lg p-8 flex items-center justify-center min-h-[300px]">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🎬</div>
-                    <p className="text-muted-foreground">
-                      Interactive animation placeholder
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      (Lottie or custom animation would be embedded here)
-                    </p>
-                  </div>
+                <div className="bg-muted/30 rounded-lg p-8 flex items-center justify-center min-h-[300px] overflow-hidden relative">
+                  {concept.category === "Structural" && (
+                    <div className="flex items-end gap-4 h-40">
+                      <div className="w-32 h-3 bg-primary/70 rounded-full" style={{ animation: "beam-bend 3s ease-in-out infinite" }} />
+                      <div className="w-32 h-3 bg-primary/70 rounded-full" style={{ animation: "beam-bend 3s ease-in-out infinite 0.5s" }} />
+                    </div>
+                  )}
+                  {concept.category === "Transportation" && (
+                    <div className="relative w-full h-32">
+                      <div className="absolute top-1/2 left-0 right-0 h-1 bg-muted-foreground/20" />
+                      <div className="absolute top-1/2 -translate-y-1/2 w-16 h-10 bg-primary rounded-lg" style={{ animation: "vehicle-move 4s linear infinite" }} />
+                      <div className="absolute top-1/2 -translate-y-1/2 w-12 h-8 bg-primary/60 rounded-lg" style={{ animation: "vehicle-move 5s linear infinite 2s" }} />
+                    </div>
+                  )}
+                  {(concept.category === "Hydraulics & Water Resources" || concept.category === "Environmental") && (
+                    <div className="flex gap-2 items-center h-32">
+                      {[...Array(5)].map((_, i) => (
+                        <div key={i} className="w-8 h-8 bg-primary/60 rounded-full" style={{ animation: `water-flow 2s ease-in-out infinite ${i * 0.3}s` }} />
+                      ))}
+                    </div>
+                  )}
+                  {concept.category === "Geotechnical" && (
+                    <div className="flex flex-col gap-2 items-center">
+                      <div className="w-48 h-16 bg-primary/80 rounded" style={{ animation: "soil-compress 4s ease-in-out infinite" }} />
+                      <div className="w-56 h-20 bg-primary/60 rounded" style={{ animation: "soil-compress 4s ease-in-out infinite 0.5s" }} />
+                      <div className="w-64 h-24 bg-primary/40 rounded" style={{ animation: "soil-compress 4s ease-in-out infinite 1s" }} />
+                    </div>
+                  )}
+                  {concept.category === "Construction Mgmt Advanced" && (
+                    <div className="flex gap-4 items-end h-40">
+                      {[...Array(4)].map((_, i) => (
+                        <div key={i} className="w-12 bg-primary/70 rounded-t" style={{ animation: `construction-rise 3s ease-in-out infinite ${i * 0.5}s` }} />
+                      ))}
+                    </div>
+                  )}
+                  {concept.category === "Surveying Advanced" && (
+                    <div className="relative w-32 h-32">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-32 bg-primary/70 origin-bottom" style={{ animation: "survey-scan 4s ease-in-out infinite" }} />
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-16 bg-primary/30 rounded-full" />
+                    </div>
+                  )}
+                  {concept.category === "Urban Planning & Sustainability" && (
+                    <div className="grid grid-cols-3 gap-3">
+                      {[...Array(9)].map((_, i) => (
+                        <div key={i} className="w-12 h-12 bg-primary/60 rounded" style={{ animation: `city-pulse 3s ease-in-out infinite ${i * 0.2}s` }} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
