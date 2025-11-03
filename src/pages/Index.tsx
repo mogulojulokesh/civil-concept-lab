@@ -1,184 +1,195 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building2, Mountain, Car, Leaf, ArrowRight, BookOpen, Users, Lightbulb } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import GlossarySidebar from "@/components/GlossarySidebar";
-import CivilGPT from "@/components/CivilGPT";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Index = () => {
-  const disciplines = [
-    {
-      title: "Structural Engineering",
-      description: "Explore load types, beam behavior, trusses, and material properties",
-      icon: Building2,
-      path: "/structural",
-      color: "text-blue-600 dark:text-blue-400",
-    },
-    {
-      title: "Geotechnical Engineering",
-      description: "Understand soil mechanics, foundations, and ground stability",
-      icon: Mountain,
-      path: "/geotechnical",
-      color: "text-amber-600 dark:text-amber-400",
-    },
-    {
-      title: "Transportation Engineering",
-      description: "Learn about traffic flow, pavement design, and road systems",
-      icon: Car,
-      path: "/transportation",
-      color: "text-green-600 dark:text-green-400",
-    },
-    {
-      title: "Environmental Engineering",
-      description: "Discover water treatment, pollution control, and sustainability",
-      icon: Leaf,
-      path: "/environmental",
-      color: "text-emerald-600 dark:text-emerald-400",
-    },
-  ];
+  const [typedText, setTypedText] = useState("");
+  const [showWelcome, setShowWelcome] = useState(false);
+  const initialText = "Initializing Civil Concept Core";
+  const welcomeText = "Welcome, Engineer.";
+
+  useEffect(() => {
+    let currentIndex = 0;
+    let isInitializing = true;
+
+    const typeInterval = setInterval(() => {
+      if (isInitializing) {
+        if (currentIndex <= initialText.length) {
+          setTypedText(initialText.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          // Pause, then switch to welcome message
+          setTimeout(() => {
+            isInitializing = false;
+            currentIndex = 0;
+            setShowWelcome(true);
+          }, 1000);
+        }
+      } else {
+        if (currentIndex <= welcomeText.length) {
+          setTypedText(welcomeText.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }
+    }, 100);
+
+    return () => clearInterval(typeInterval);
+  }, []);
 
   return (
     <>
       <Helmet>
-        <title>Civil Concepts Lab - Learn Civil Engineering Interactively</title>
+        <title>Civil Concepts Lab - Where Engineering Meets Intelligence</title>
         <meta 
           name="description" 
-          content="Master civil engineering concepts through interactive visualizations and hands-on simulations. Explore structural, geotechnical, transportation, and environmental engineering." 
+          content="Enter the Civil Concepts Lab. An AI-powered platform for mastering civil engineering principles through interactive learning." 
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background content-wrapper">
-        <Navbar />
-        <GlossarySidebar />
-        <CivilGPT />
+      {/* Deep Space Background */}
+      <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[hsl(222_47%_8%)] via-[hsl(222_47%_11%)] to-black">
+        
+        {/* Animated Stars */}
+        <div className="absolute inset-0 opacity-60">
+          <div 
+            className="absolute w-[200%] h-[200%] top-0 left-0"
+            style={{
+              background: `
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 60% 70%, white, transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(2px 2px at 90% 60%, white, transparent),
+                radial-gradient(1px 1px at 33% 80%, white, transparent),
+                radial-gradient(2px 2px at 15% 15%, white, transparent),
+                radial-gradient(1px 1px at 70% 40%, white, transparent)
+              `,
+              backgroundSize: '200% 200%',
+              animation: 'stars-drift 60s linear infinite'
+            }}
+          />
+        </div>
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Civil Concepts Lab
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Interactive explanations of Civil Engineering principles — Structural, Geotechnical, Transportation, Environmental, and more.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" variant="secondary" asChild>
-                <Link to="/library">
-                  Explore the Library <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+        {/* Central Radial Glow */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, hsl(189 94% 43% / 0.15) 0%, hsl(217 91% 45% / 0.1) 30%, transparent 70%)',
+          }}
+        />
+
+        {/* Main Content Container */}
+        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
+          
+          {/* Central HUD Animation */}
+          <div className="relative w-80 h-80 mb-12">
+            
+            {/* Rotating Outer Ring */}
+            <div 
+              className="absolute inset-0 rounded-full border-2 border-cyan-400/30"
+              style={{
+                animation: 'hud-rotate 20s linear infinite'
+              }}
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_hsl(189_94%_43%)]" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_hsl(189_94%_43%)]" />
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_hsl(189_94%_43%)]" />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_hsl(189_94%_43%)]" />
+            </div>
+
+            {/* Rotating Inner Ring */}
+            <div 
+              className="absolute inset-8 rounded-full border border-blue-400/40"
+              style={{
+                animation: 'hud-rotate 15s linear infinite reverse'
+              }}
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_hsl(217_91%_45%)]" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_hsl(217_91%_45%)]" />
+            </div>
+
+            {/* Central Core with Pulsing Glow */}
+            <div 
+              className="absolute inset-20 rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border-2 border-cyan-400/50"
+              style={{
+                animation: 'pulse-glow 3s ease-in-out infinite'
+              }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-cyan-400/40 shadow-[0_0_30px_hsl(189_94%_43%)]" />
+              </div>
+            </div>
+
+            {/* Data Lines */}
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+              <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center hover:shadow-md transition-shadow">
-              <CardHeader>
-                <Lightbulb className="h-12 w-12 text-primary mx-auto mb-2" />
-                <CardTitle>Interactive Learning</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Engage with dynamic simulations and visualizations that bring concepts to life
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-md transition-shadow">
-              <CardHeader>
-                <BookOpen className="h-12 w-12 text-primary mx-auto mb-2" />
-                <CardTitle>Comprehensive Content</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Cover all major civil engineering disciplines with detailed explanations
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-md transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-primary mx-auto mb-2" />
-                <CardTitle>Self-Paced</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Learn at your own pace with quizzes to test and reinforce your understanding
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Disciplines Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Explore Engineering Disciplines</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Choose a discipline to begin your learning journey
+          {/* Typing Text Animation */}
+          <div className="text-center mb-8 min-h-[60px]" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <p className="text-2xl md:text-3xl font-bold text-cyan-400 tracking-wider">
+              {typedText}
+              <span className="inline-block w-1 h-6 ml-1 bg-cyan-400" style={{ animation: 'typing-blink 1s step-end infinite' }} />
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {disciplines.map((discipline, index) => (
-              <Link key={index} to={discipline.path} className="group">
-                <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-card">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-2xl mb-2 flex items-center gap-2">
-                          <discipline.icon className={`h-8 w-8 ${discipline.color}`} />
-                          {discipline.title}
-                        </CardTitle>
-                        <CardDescription className="text-base">
-                          {discipline.description}
-                        </CardDescription>
-                      </div>
-                      <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                    </div>
-                  </CardHeader>
-                </Card>
+          {/* Main Headline */}
+          <div className="text-center mb-12 max-w-3xl">
+            <h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent"
+              style={{ 
+                fontFamily: 'Exo 2, sans-serif',
+                textShadow: '0 0 30px hsl(189 94% 43% / 0.3)'
+              }}
+            >
+              Civil Concept Lab
+            </h1>
+            <p className="text-xl md:text-2xl text-cyan-100/80 font-light" style={{ fontFamily: 'Exo 2, sans-serif' }}>
+              Where Engineering Meets Intelligence
+            </p>
+          </div>
+
+          {/* Glowing CTA Button */}
+          <div className="relative group">
+            {/* Ripple Effect on Hover */}
+            <div 
+              className="absolute inset-0 rounded-full bg-cyan-400/30 opacity-0 group-hover:opacity-100 transition-opacity"
+              style={{ animation: 'ripple-expand 1.5s ease-out infinite' }}
+            />
+            
+            <Button
+              size="lg"
+              asChild
+              className="relative z-10 px-8 py-6 text-lg font-semibold bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white border-2 border-cyan-400/50 shadow-[0_0_30px_hsl(189_94%_43%_/_0.4)] hover:shadow-[0_0_50px_hsl(189_94%_43%_/_0.6)] transition-all duration-300 hover:scale-110"
+              style={{ fontFamily: 'Exo 2, sans-serif' }}
+            >
+              <Link to="/what-is-a-concept">
+                Enter the Lab
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-            ))}
+            </Button>
           </div>
-        </div>
-      </section>
 
-      {/* About Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">About Civil Concepts Lab</h2>
-            <p className="text-lg text-muted-foreground mb-4">
-              Civil Concepts Lab is designed for students, professionals, and
-              enthusiasts who want to deepen their understanding of fundamental civil engineering
-              principles.
-            </p>
-            <p className="text-lg text-muted-foreground">
-              Each topic includes clear explanations, interactive demonstrations, and quizzes to help
-              you master the material. Use the search bar to find specific topics, and explore the
-              glossary for quick definitions of key terms.
-            </p>
-          </div>
+          {/* Subtle Status Text */}
+          <p 
+            className="mt-8 text-cyan-400/60 text-sm tracking-widest uppercase"
+            style={{ fontFamily: 'Orbitron, sans-serif' }}
+          >
+            System Ready • Neural Core Online
+          </p>
         </div>
-      </section>
 
-      {/* Footer */}
-        <footer className="bg-card border-t py-8">
-          <div className="container mx-auto px-4 text-center text-muted-foreground">
-            <p>Developed on Lovable AI — Civil Concepts Lab © 2025.</p>
-          </div>
-        </footer>
+        {/* Corner Decorative Elements */}
+        <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-cyan-400/30" />
+        <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-cyan-400/30" />
+        <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-cyan-400/30" />
+        <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-cyan-400/30" />
       </div>
     </>
   );
