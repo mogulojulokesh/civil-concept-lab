@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, XCircle } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { CheckCircle2, XCircle, Award } from "lucide-react";
 
 interface Question {
   question: string;
@@ -53,33 +54,53 @@ const Quiz = ({ questions, title }: QuizProps) => {
   };
 
   if (showResult) {
+    const percentage = Math.round((score / questions.length) * 100);
+    const isMastered = percentage >= 80;
+
     return (
       <Card className="bg-gradient-card">
         <CardHeader>
           <CardTitle className="text-center">Quiz Complete!</CardTitle>
         </CardHeader>
-        <CardContent className="text-center space-y-4">
+        <CardContent className="text-center space-y-6">
+          {isMastered && (
+            <div className="animate-scale-in">
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 mb-4">
+                <Award className="w-16 h-16 text-primary animate-pulse" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary mb-2">Concept Mastered! 🎉</h3>
+              <p className="text-sm text-muted-foreground">Outstanding performance!</p>
+            </div>
+          )}
           <div className="text-4xl font-bold text-primary">
             {score} / {questions.length}
           </div>
-          <p className="text-muted-foreground">
-            You got {Math.round((score / questions.length) * 100)}% correct!
-          </p>
-          <Button onClick={resetQuiz}>Retake Quiz</Button>
+          <div className="space-y-2">
+            <Progress value={percentage} className="h-3" />
+            <p className="text-muted-foreground">
+              You got {percentage}% correct!
+            </p>
+          </div>
+          <Button onClick={resetQuiz} size="lg">Retake Quiz</Button>
         </CardContent>
       </Card>
     );
   }
 
   const question = questions[currentQuestion];
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
 
   return (
     <Card className="bg-gradient-card">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Question {currentQuestion + 1} of {questions.length}
-        </p>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <span>Question {currentQuestion + 1} of {questions.length}</span>
+            <span>{Math.round(progress)}%</span>
+          </div>
+          <Progress value={progress} className="h-2" />
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-lg font-medium">{question.question}</p>
