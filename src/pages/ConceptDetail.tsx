@@ -4,14 +4,21 @@ import Navbar from "@/components/Navbar";
 import GlossarySidebar from "@/components/GlossarySidebar";
 import CivilGPT from "@/components/CivilGPT";
 import Quiz from "@/components/Quiz";
+import UserNotes from "@/components/UserNotes";
+import BadgePopup from "@/components/BadgePopup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, BookOpen } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, BookOpen, CheckCircle2 } from "lucide-react";
 import { concepts } from "@/data/concepts";
+import { useProgress } from "@/hooks/useProgress";
 
 const ConceptDetail = () => {
   const { id } = useParams();
   const concept = concepts.find((c) => c.id === id);
+  const { markAsCompleted, isCompleted, showBadge, closeBadge, completedCount } = useProgress();
+  
+  const conceptCompleted = id ? isCompleted(id) : false;
 
   if (!concept) {
     return (
@@ -47,7 +54,10 @@ const ConceptDetail = () => {
       <Helmet>
         <title>{concept.title} - Civil Concepts Lab</title>
         <meta name="description" content={concept.shortDescription} />
+        <meta name="keywords" content={`civil engineering, ${concept.category.toLowerCase()}, ${concept.title.toLowerCase()}, engineering concepts, learning platform`} />
       </Helmet>
+
+      <BadgePopup show={showBadge} onClose={closeBadge} />
 
       <div className="min-h-screen bg-background">
         <Navbar />
@@ -66,10 +76,19 @@ const ConceptDetail = () => {
 
           {/* Header */}
           <div className="max-w-4xl mx-auto">
-            <div className="mb-4">
+            <div className="mb-4 flex items-center gap-3">
               <span className="text-sm font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary">
                 {concept.category}
               </span>
+              {conceptCompleted && (
+                <Badge variant="secondary" className="flex items-center gap-1">
+                  <CheckCircle2 className="h-3 w-3" />
+                  Completed
+                </Badge>
+              )}
+              <Badge variant="outline" className="ml-auto">
+                {completedCount} / {concepts.length} Concepts Completed
+              </Badge>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{concept.title}</h1>
 
@@ -149,9 +168,19 @@ const ConceptDetail = () => {
                 <CardTitle className="text-2xl">Test Your Understanding</CardTitle>
               </CardHeader>
               <CardContent>
-                <Quiz questions={concept.quiz} title={concept.title} />
+                <Quiz 
+                  questions={concept.quiz} 
+                  title={concept.title}
+                  conceptId={concept.id}
+                  onComplete={markAsCompleted}
+                />
               </CardContent>
             </Card>
+
+            {/* User Notes Section */}
+            <div className="mb-8">
+              <UserNotes conceptId={concept.id} />
+            </div>
 
             {/* Further Reading */}
             <Card className="bg-gradient-card">

@@ -14,9 +14,11 @@ interface Question {
 interface QuizProps {
   questions: Question[];
   title: string;
+  conceptId?: string;
+  onComplete?: (conceptId: string) => void;
 }
 
-const Quiz = ({ questions, title }: QuizProps) => {
+const Quiz = ({ questions, title, conceptId, onComplete }: QuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -42,6 +44,10 @@ const Quiz = ({ questions, title }: QuizProps) => {
       setSelectedAnswer(null);
     } else {
       setShowResult(true);
+      // Mark as completed when quiz is finished
+      if (onComplete && conceptId) {
+        onComplete(conceptId);
+      }
     }
   };
 

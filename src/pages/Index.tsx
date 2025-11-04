@@ -1,44 +1,50 @@
-import { Helmet } from "react-helmet";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Hammer, ArrowRight } from "lucide-react";
 
 const Index = () => {
-  const [typedText, setTypedText] = useState("");
-  const [showWelcome, setShowWelcome] = useState(false);
-  const initialText = "Initializing Civil Concept Core";
-  const welcomeText = "Welcome, Engineer.";
+  const [showLoading, setShowLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("Initializing Civil Concept Core");
 
   useEffect(() => {
-    let currentIndex = 0;
-    let isInitializing = true;
+    const timer1 = setTimeout(() => {
+      setLoadingText("Welcome, Engineer.");
+    }, 2000);
 
-    const typeInterval = setInterval(() => {
-      if (isInitializing) {
-        if (currentIndex <= initialText.length) {
-          setTypedText(initialText.slice(0, currentIndex));
-          currentIndex++;
-        } else {
-          // Pause, then switch to welcome message
-          setTimeout(() => {
-            isInitializing = false;
-            currentIndex = 0;
-            setShowWelcome(true);
-          }, 1000);
-        }
-      } else {
-        if (currentIndex <= welcomeText.length) {
-          setTypedText(welcomeText.slice(0, currentIndex));
-          currentIndex++;
-        } else {
-          clearInterval(typeInterval);
-        }
-      }
-    }, 100);
+    const timer2 = setTimeout(() => {
+      setShowLoading(false);
+    }, 3500);
 
-    return () => clearInterval(typeInterval);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
+
+  if (showLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#0f172a] to-black flex items-center justify-center overflow-hidden relative">
+        <Helmet>
+          <title>Civil Concepts Lab - Initializing</title>
+        </Helmet>
+        
+        {/* Animated stars */}
+        <div className="stars absolute inset-0" />
+        
+        {/* Central loading animation */}
+        <div className="text-center z-10">
+          <div className="mb-8 inline-flex items-center justify-center">
+            <Hammer className="w-24 h-24 text-primary loading-icon" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-['Orbitron'] text-primary animate-pulse">
+            {loadingText}
+          </h2>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -51,7 +57,7 @@ const Index = () => {
       </Helmet>
 
       {/* Deep Space Background */}
-      <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[hsl(222_47%_8%)] via-[hsl(222_47%_11%)] to-black">
+      <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[hsl(222_47%_8%)] via-[hsl(222_47%_11%)] to-black page-enter">
         
         {/* Animated Stars */}
         <div className="absolute inset-0 opacity-60">
@@ -129,14 +135,6 @@ const Index = () => {
               <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
               <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
             </div>
-          </div>
-
-          {/* Typing Text Animation */}
-          <div className="text-center mb-8 min-h-[60px]" style={{ fontFamily: 'Orbitron, sans-serif' }}>
-            <p className="text-2xl md:text-3xl font-bold text-cyan-400 tracking-wider">
-              {typedText}
-              <span className="inline-block w-1 h-6 ml-1 bg-cyan-400" style={{ animation: 'typing-blink 1s step-end infinite' }} />
-            </p>
           </div>
 
           {/* Main Headline */}

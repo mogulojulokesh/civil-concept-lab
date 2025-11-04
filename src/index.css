@@ -212,6 +212,34 @@ All colors MUST be HSL.
     0%, 100% { opacity: 0.6; }
     50% { opacity: 0.3; }
   }
+
+  /* Page transition animations */
+  .page-enter {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  /* Parallax effect */
+  .parallax-section {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Loading animation for homepage */
+  @keyframes rotate-icon {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+
+  .loading-icon {
+    animation: rotate-icon 2s ease-in-out;
+  }
 }
 
 @layer components {
